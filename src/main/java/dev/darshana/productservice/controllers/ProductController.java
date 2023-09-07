@@ -3,10 +3,11 @@ package dev.darshana.productservice.controllers;
 import dev.darshana.productservice.dtos.GenericProductDto;
 import dev.darshana.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
@@ -19,10 +20,11 @@ public class ProductController {
     }
     @GetMapping
     public List<GenericProductDto> getAllProducts(){
-        return List.of(
-                new GenericProductDto();
-                new GenericProductDto();
-        );
+        /*return List.of(
+                new GenericProductDto(),
+                new GenericProductDto()
+        );*/
+        return productService.getAllProducts();
     }
 
     @GetMapping("{id}")
@@ -32,8 +34,11 @@ public class ProductController {
     }
 
     @DeleteMapping("{id}")
-    public void deleteProductById(){
-
+    public ResponseEntity<GenericProductDto> deleteProductById(@PathVariable("id") Long id){
+        return new ResponseEntity<>(
+                productService.deleteProduct(id),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
@@ -42,7 +47,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public void updateProductById(){
-
+    public GenericProductDto updateProductById(@PathVariable("id") Long id, @RequestBody GenericProductDto product){
+        return productService.updateProductById(product, id);
     }
 }
