@@ -1,6 +1,8 @@
 package dev.darshana.productservice.controllers;
 
+import dev.darshana.productservice.dtos.ExceptionDto;
 import dev.darshana.productservice.dtos.GenericProductDto;
+import dev.darshana.productservice.exceptions.NotFoundException;
 import dev.darshana.productservice.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,15 @@ public class ProductController {
     public ProductController(@Qualifier("fakeStoreProductServiceImpl") ProductService productService){
         this.productService = productService;
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    private ResponseEntity<ExceptionDto> handleNotFoundException(NotFoundException notFoundException){
+        //System.out.println("Not found");
+        return new ResponseEntity<>(
+                new ExceptionDto(HttpStatus.NOT_FOUND, notFoundException.getMessage()),
+                HttpStatus.NOT_FOUND
+        );
+    }
     @GetMapping
     public List<GenericProductDto> getAllProducts(){
         /*return List.of(
@@ -28,7 +39,7 @@ public class ProductController {
     }
 
     @GetMapping("{id}")
-    public GenericProductDto getProductById(@PathVariable("id") Long id){
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
         return productService.getProductById(id);
         //return "Here is product id: "+id;
     }
