@@ -1,6 +1,5 @@
-package dev.darshana.productservice.dtos;
+package dev.darshana.productservice.thirdPartClients.productService.fakseStore;
 
-import dev.darshana.productservice.models.Category;
 import lombok.Getter;
 import lombok.Setter;
 

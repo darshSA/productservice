@@ -21,14 +21,14 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @ExceptionHandler(NotFoundException.class)
+    /*@ExceptionHandler(NotFoundException.class)
     private ResponseEntity<ExceptionDto> handleNotFoundException(NotFoundException notFoundException){
         //System.out.println("Not found");
         return new ResponseEntity<>(
                 new ExceptionDto(HttpStatus.NOT_FOUND, notFoundException.getMessage()),
                 HttpStatus.NOT_FOUND
         );
-    }
+    }*/
     @GetMapping
     public List<GenericProductDto> getAllProducts(){
         /*return List.of(
