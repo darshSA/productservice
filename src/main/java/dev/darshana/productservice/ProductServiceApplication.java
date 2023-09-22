@@ -15,9 +15,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootApplication
-public class ProductServiceApplication implements CommandLineRunner {
+public class ProductServiceApplication {//implements CommandLineRunner {
 
-	private final CategoryRepository categoryRepository;
+	/*private final CategoryRepository categoryRepository;
 	private final ProductRepository productRepository;
 	private final PriceRepository priceRepository;
 
@@ -27,13 +27,13 @@ public class ProductServiceApplication implements CommandLineRunner {
 		this.categoryRepository = categoryRepository;
 		this.productRepository = productRepository;
 		this.priceRepository = priceRepository;
-	}
+	}*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProductServiceApplication.class, args);
 	}
 
-	@Override
+	/*@Override
 	public void run(String... args) throws Exception {
 		Category category = new Category();
 		category.setName("Apple Watches");
@@ -57,7 +57,7 @@ public class ProductServiceApplication implements CommandLineRunner {
 
 		List<Product> products1 = productRepository.findAllByTitle("Apple Watch 15 Pro");
 		System.out.println(products1.size());
-		/*Optional<Category> categoryOptional = categoryRepository.findById(UUID.fromString("a346bfb8-8db1-4173-92b9-343e36866f9b"));
+		*//*Optional<Category> categoryOptional = categoryRepository.findById(UUID.fromString("a346bfb8-8db1-4173-92b9-343e36866f9b"));
 		if(!categoryOptional.isEmpty()){
 			Category category1 = categoryOptional.get();
 		System.out.println("Category name is "+category1.getName());
@@ -65,6 +65,6 @@ public class ProductServiceApplication implements CommandLineRunner {
 
 		for(Product product1:category1.getProducts()){
 			System.out.println(product1.getTitle());
-		}}*/
-	}
+		}}*//*
+	}*/
 }
