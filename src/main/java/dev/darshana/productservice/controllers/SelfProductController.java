@@ -39,6 +39,6 @@ public class SelfProductController {
     @PutMapping("{id}")
     public ProductDto updateProductById(@PathVariable("id") String id,
                                         @RequestBody ProductDto productDto) throws NotFoundException {
-        return null; //selfProductService.updateProductById(productDto, id);
+        return selfProductService.updateProductById(productDto, id);
     }
 }

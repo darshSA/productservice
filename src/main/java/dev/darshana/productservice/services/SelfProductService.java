@@ -1,5 +1,6 @@
 package dev.darshana.productservice.services;
 
+import dev.darshana.productservice.dtos.CategoryDto;
 import dev.darshana.productservice.dtos.GenericProductDto;
 import dev.darshana.productservice.dtos.ProductDto;
 import dev.darshana.productservice.exceptions.NotFoundException;
@@ -66,18 +67,19 @@ public class SelfProductService {//implements ProductService{
         }
     }
 
-    /*public ProductDto updateProductById(ProductDto productDto, String id) throws NotFoundException, IllegalArgumentException {
-        Optional<Product> product = productRepository.findById(UUID.fromString(id));
-        if(product.isEmpty())
+    public ProductDto updateProductById(ProductDto productDto, String id) throws NotFoundException, IllegalArgumentException {
+        Optional<Product> productOptional = productRepository.findById(UUID.fromString(id));
+        if(productOptional.isEmpty())
             throw new NotFoundException("Product with id "+id+" does not exist");
 
-        Optional<Product> product1 = productRepository.updateProductByUuid(UUID.fromString(id),
-                convertDtoToProduct(productDto));
-        return convertToProductDto(product1.get());
-    }*/
+        productDto.setId(id);
+        Product product = productRepository.save(convertDtoToProduct(productDto));
+        return convertToProductDto(product);
+    }
 
-    private Product convertDtoToProduct(ProductDto productDto) {
+    public Product convertDtoToProduct(ProductDto productDto) {
         Product product1 = new Product();
+        product1.setUuid(UUID.fromString(productDto.getId()));
         product1.setTitle(productDto.getTitle());
         product1.setDescription(productDto.getDescription());
 
@@ -95,4 +97,5 @@ public class SelfProductService {//implements ProductService{
         product1.setImage(productDto.getImage());
         return product1;
     }
+
 }
