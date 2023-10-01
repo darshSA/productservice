@@ -19,6 +19,6 @@ import java.util.List;
 public class Category extends BaseModel{
     private String name;
     @OneToMany(mappedBy = "category")
-    @Fetch(FetchMode.SELECT)
+    @Fetch(FetchMode.SUBSELECT)
     private List<Product> products;
 }
